@@ -1,0 +1,123 @@
+@import url("https://fonts.googleapis.com/css2?family=Lora&display=swap");
+
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+* {
+  /* border: 1px solid black; */
+  margin: 0 auto;
+  max-width: 100%;
+  font-family: "Lora", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans",
+    Arial, sans-serif;
+}
+.top {
+  margin: 0px;
+  padding: 5vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: block-inline;
+  width: 90vw;
+  /* height: 50vh; */
+  background-position: center;
+  background-size: contain;
+  background-color: white;
+  background-image: url("../src/back.jpg");
+  /* color: white; */
+  text-align: start;
+}
+.top h3 {
+  padding-block: 10px;
+  display: inline-block;
+}
+
+.top h1 {
+  padding-top: 10px;
+  margin-left: 0px;
+  width: 65vw;
+  font-size: 2.5rem;
+}
+.adbanner {
+  height: 20vh;
+  color: white;
+  background-color: orange;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px;
+  text-align: start;
+}
+.menu {
+  display: inline;
+  /* border: red 2px solid; */
+  float: right;
+}
+.head {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.avatar {
+  height: 30vw;
+  width: 40vw;
+  margin-right: 2vh;
+  display: inline-block;
+}
+.avatarparent {
+  margin-block: 3vh;
+  /* overflow-x: scroll; */
+}
+.maintab h3 {
+  display: inline;
+  text-align: center;
+}
+.card {
+  text-align: start;
+}
+.services {
+  padding: 15vw;
+}
+.gallery {
+  padding-top: 10vh;
+  text-align: start;
+}
+.gallery h1 {
+}
+.location {
+  min-height: 50vh;
+  background-color: gold;
+  color: white;
+}
+.location * {
+  display: block;
+}
+/* ////////////////////////////////////////// */
+.detail {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 9vh;
+  left: 0;
+  background-color: orange;
+}
+.swiper {
+  height: 60vh;
+  background-color: orange;
+}
+.swiper img {
+  height: 100%;
+  width: auto;
+  object-fit: cover;
+}
+.detailinfo {
+  background-color: white;
+  height: 38%;
+  border-radius: 7vh;
+  margin: 1vh;
+}
+form * {
+  display: block;
+  align: center;
+}
