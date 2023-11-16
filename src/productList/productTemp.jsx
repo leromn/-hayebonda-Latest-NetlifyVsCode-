@@ -20,7 +20,7 @@ const changeFormat = async (file) => {
   // const uint8Array = new Uint8Array(item.thumbnail.imageData.data);
   const uint8Array = new Uint8Array(file);
 
-  const base64String = btoa(String.fromCharCode.apply(null, uint8Array));
+  const base64String = await btoa(String.fromCharCode.apply(null, uint8Array));
   const newUrl = `data:image/jpeg;base64,${base64String}`;
   return newUrl;
 };
