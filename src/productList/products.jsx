@@ -21,12 +21,9 @@ export default function Products() {
 
   //form variables
   const [value, setValue] = React.useState("1");
-  const [name, setName] = React.useState("1");
-  const [desc, setDesc] = React.useState("1");
-  const [price, setPrice] = React.useState(0);
-  const [thumb, setThumb] = React.useState();
+  const [thumb, setThumb] = React.useState([]);
   const [products, setProducts] = useState([]);
-
+  var tempThumbArray;
   //cloth type manager
   const storeClothType = useSelector((state) => state.counter.clothType);
   const [currentClothType, setCurrentClothType] = useState("all");
@@ -50,11 +47,21 @@ export default function Products() {
     setLoading(true);
     try {
       const response = await axios.get(
-        `https://zkls2z-8000.csb.app/home/popular?page=${page}&clothType=${currentClothType}`
+        `https://zkls2z-8000.csb.app/home/popular?page=${page}&clothType=${currentClothType}`,
       );
       const newData = response.data.products;
       setProducts((prevData) => [...prevData, ...newData]);
       setPage((prevPage) => prevPage + 1);
+      // tempThumbArray = products.map(async (item, index) => {
+      //   var base64ImageString = await btoa(
+      //     String.fromCharCode.apply(
+      //       null,
+      //       new Uint8Array(item.thumbnail.imageData.data),
+      //     ),
+      //   );
+      //   return base64ImageString;
+      // });
+      // console.log("products", products); //
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -105,7 +112,7 @@ export default function Products() {
         </Box>
         <TabPanel value="1">
           <TypeSelector />
-          {products.map((product) => {
+          {products.map((product, index) => {
             return <ProductTemp item={product} />;
           })}
         </TabPanel>

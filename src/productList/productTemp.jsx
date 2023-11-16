@@ -7,28 +7,52 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Rating } from "react-simple-star-rating";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-
+import { useEffect, useCallback, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   decrement,
   increment,
   setDetailId,
-  setProductDetail
+  setProductDetail,
 } from "../redux/counterSlice";
+
+const changeFormat = async (file) => {
+  // const uint8Array = new Uint8Array(item.thumbnail.imageData.data);
+  const uint8Array = new Uint8Array(file);
+
+  const base64String = btoa(String.fromCharCode.apply(null, uint8Array));
+  const newUrl = `data:image/jpeg;base64,${base64String}`;
+  return newUrl;
+};
 
 export default function ProductTemp({ item }) {
   const dispatch = useDispatch();
-  var rating = 1;
-  let base64ImageString = Buffer.from(
-    item.thumbnail.imageData.data,
-    "binary"
-  ).toString("base64");
+  var rating = 5;
+
+  const [dataUrl, setDataUrl] = useState("");
+
+  // const convertBinary = useCallback(async () => {
+  //   base64ImageString = await btoa(
+  //     String.fromCharCode.apply(
+  //       null,
+  //       new Uint8Array(item.thumbnail.imageData.data),
+  //     ),
+  //   );
+  //   console.log("binary converted");
+  //   converted = true;
+  // }, []);
+
+  useEffect(() => {
+    setDataUrl(changeFormat(item.thumbnail.imageData.data));
+    // console.log("imageData= ", item.thumbnail.imageData);
+  }, []);
+  // convertBinary();
   var tempProductDetail = {
     name: item.productName,
     description: item.productDescription,
     price: item.price,
     rating: item.rating,
-    _id: item._id
+    _id: item._id,
   };
 
   return (
@@ -45,7 +69,7 @@ export default function ProductTemp({ item }) {
       <CardMedia
         sx={{ height: 240 }}
         component="img"
-        src={`data:image/jpeg;base64,${base64ImageString}`}
+        src={`data:image/jpeg;base64,${dataUrl}`}
         title="green iguana"
       />
       {/* {console.log(props.thumb)} */}
