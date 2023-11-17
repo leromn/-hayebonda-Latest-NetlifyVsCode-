@@ -17,12 +17,10 @@ import {
 } from "../redux/counterSlice";
 
 const changeFormat = async (file) => {
-  // const uint8Array = new Uint8Array(item.thumbnail.imageData.data);
   const uint8Array = new Uint8Array(file);
-
-  const base64String = await btoa(String.fromCharCode.apply(null, uint8Array));
-  const newUrl = `data:image/jpeg;base64,${base64String}`;
-  return newUrl;
+  const blob = new Blob([uint8Array], { type: 'image/jpeg' });
+  const imageUrl = URL.createObjectURL(blob);
+  return imageUrl;
 };
 
 export default function ProductTemp({ item }) {
@@ -31,16 +29,6 @@ export default function ProductTemp({ item }) {
 
   const [dataUrl, setDataUrl] = useState("");
 
-  // const convertBinary = useCallback(async () => {
-  //   base64ImageString = await btoa(
-  //     String.fromCharCode.apply(
-  //       null,
-  //       new Uint8Array(item.thumbnail.imageData.data),
-  //     ),
-  //   );
-  //   console.log("binary converted");
-  //   converted = true;
-  // }, []);
 
   useEffect(() => {
     setDataUrl(changeFormat(item.thumbnail.imageData.data));
@@ -69,7 +57,7 @@ export default function ProductTemp({ item }) {
       <CardMedia
         sx={{ height: 240 }}
         component="img"
-        src={`data:image/jpeg;base64,${dataUrl}`}
+        src={dataUrl}
         title="green iguana"
       />
       {/* {console.log(props.thumb)} */}
